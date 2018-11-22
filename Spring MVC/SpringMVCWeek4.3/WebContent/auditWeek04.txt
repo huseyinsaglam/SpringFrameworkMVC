@@ -1,0 +1,9 @@
+2018-03-10 23:31:11 auditLogger : preHandle : GET request
+2018-03-10 23:31:11 auditLogger : postHandle : GET request
+2018-03-10 23:33:06 auditLogger : preHandle : GET request
+2018-03-10 23:33:06 auditLogger : postHandle : GET request
+2018-03-10 23:33:17 auditLogger : preHandle : POST request
+2018-03-10 23:33:17 auditLogger : postHandle : POST request
+2018-03-10 23:34:17 auditLogger : preHandle : POST request
+2018-03-10 23:34:17 auditLogger : postHandle : POST request
+2018-03-10 23:34:17 auditLogger : A New product[11323] Added by 0:0:0:0:0:0:0:1 on 10/03/2018 at 11:34:17

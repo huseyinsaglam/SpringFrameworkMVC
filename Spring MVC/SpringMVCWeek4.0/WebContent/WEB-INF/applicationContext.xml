@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context.xsd 
+     http://www.springframework.org/schema/mvc 
+     http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+     
+     ">
+	
+	<context:component-scan base-package="controller,dao,service,validator"/>
+	
+	<!-- resources dosyalarını , aktif hale getirmek icin -->
+	<mvc:resources mapping="/resources/**" location="resources/"/>
+
+	<!-- matrix variable varsayilan olarak kapalidir, aktif hale getirmek icin -->
+	<mvc:annotation-driven enable-matrix-variables="true"/>
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view.pages/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+   		<property name="basename" value="file/projectMessages"/> 
+   		<property name="defaultEncoding" value="UTF-8"/> 
+	</bean>
+	
+	<!-- file/projectMessages"
+	properties dosyasi source folder altinda yer almakta.
+	file package altinda yer aliyor.
+	_tr ya da _en yazmiyoruz. properties uzantisini yazmiyoruz.
+	 -->
+	
+	<bean id="localeResolver"
+        class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="tr" />
+    </bean>
+ 
+ 	<!--  
+ 	Ilgili kullanicinin Locale bilgisi saklanir.
+ 	 -->
+ 	 
+ 	 
+ 	 <!-- interceptor , durdurucu kesici gibi anlamlari vardir.
+ 	 filter mantigi aslinda.
+ 	 interceptor ; i18n (internationalization) -> projedeki dil destegi olarak dusunebiliri.z
+ 	 localization -> l10n -> locale gore formatlama mantigi. (date , number vs)
+ 	  -->
+  
+  <!-- 
+  Interceptor that allows for changing the current locale on every request,
+  via a configurable request parameter (default parameter name: "locale").
+  parametre ismi varsayilan olarak locale dir. bunu degistirmek icin "paramName" property icin istedigimiz degeri yazdik.
+  bu bilgi jsp sayfasindaki parametre ile ayni olmalidir.
+   -->
+   
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor"
+            class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="languageParameter" />
+        </bean>
+        <!--  <a href="?languageParameter=tr" >   value="languageParameter" aynı olmak zorundadır -->      
+    </mvc:interceptors>
+
+</beans>
